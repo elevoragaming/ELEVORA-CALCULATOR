@@ -1,0 +1,5 @@
+{
+  "name": "Battle Royale Reward Calculator",
+  "description": "A private calculator app for calculating and distributing rewards for Battle Royale matches (Solo, Duo, Squad). It calculates total pools, refunds, placement rewards, and organizer profit based on an entry fee.",
+  "requestFramePermissions": []
+}
