@@ -19,33 +19,27 @@ export const MAP_OPTIONS = [
 ];
 
 // Weights for distribution logic.
-// Calibrated for ~40% Commission scenarios to hit specific Multipliers.
 export const PRESET_CONFIGS = {
   Balanced: {
-    // Target: Rank 1 = 5x Entry Fee
-    // Logic: With 40% comm & 50% kill split, Placement Pot is small. 
-    // We need a moderate slice for Rank 1 to hit 5x.
+    // 50% Kill Split means Rank 1 relies on weight.
+    // Weight 20 in a pool of ~100 = 20%. 
     perKillRewardPercent: 50, 
-    // Rank 1 gets ~20% of Placement Pot
-    multipliers100: [20, 15, 12, 10, 8, 8, 7, 7, 6, 6], 
-    multipliers50: [30, 20, 15, 12, 12, 11],
+    multipliers100: [25, 15, 12, 10, 8, 8, 7, 7, 6, 6], 
+    multipliers50: [35, 20, 15, 12, 12, 11],
   },
   TopHeavy: {
-    // Target: Rank 1 = 12x Entry Fee
-    // Logic: Lower kill reward allows massive placement pool.
+    // 20% Kill Split means BIG Rank pool.
+    // Weight 30 = 30% of BIG pool -> HUGE Prize.
     perKillRewardPercent: 20,
-    // Rank 1 gets ~25% of Placement Pot. 
-    // (Total Pool * 0.6 * 0.8 * 0.25) ≈ 12% of Total = 12x Entry
-    multipliers100: [25, 18, 12, 10, 8, 7, 6, 5, 5, 4],
-    multipliers50: [40, 25, 15, 10, 5, 5],
+    multipliers100: [35, 20, 15, 10, 8, 6, 5, 4, 3, 2],
+    multipliers50: [45, 25, 15, 10, 5, 2],
   },
   KillFocused: {
-    // Target: Rank 1 = 3x Entry Fee
-    // Logic: Huge kill split (70%) leaves tiny placement pot.
+    // 70% Kill Split means tiny Rank pool.
+    // Rank 1 needs a huge chunk (40%) of the tiny pool to look decent.
     perKillRewardPercent: 70,
-    // Rank 1 needs a huge chunk of the TINY placement pot to even reach 3x.
-    multipliers100: [25, 20, 15, 10, 8, 6, 4, 4, 4, 4],
-    multipliers50: [30, 25, 20, 15, 5, 5],
+    multipliers100: [40, 20, 15, 10, 5, 3, 2, 2, 2, 1],
+    multipliers50: [45, 25, 20, 5, 3, 2],
   },
 };
 

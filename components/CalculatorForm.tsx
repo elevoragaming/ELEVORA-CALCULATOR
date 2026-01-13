@@ -26,7 +26,8 @@ interface CalculatorFormProps {
   isAISuggesting: boolean;
   aiSuggestion: string;
   aiError: string;
-  onOpenStrategy: () => void; // New Prop
+  onOpenStrategy: () => void;
+  calculatedPerKill: number; // New prop
 }
 
 const NumericInputController: React.FC<{
@@ -113,7 +114,8 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({
   isAISuggesting,
   aiSuggestion,
   aiError,
-  onOpenStrategy
+  onOpenStrategy,
+  calculatedPerKill
 }) => {
   const handleMatchTypeClick = (type: MatchType) => {
     setMatchType(type);
@@ -180,16 +182,18 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({
                     </div>
                 </div>
 
-                <div className="animate-slide-in-up" style={{ animationDelay: '500ms' }}>
-                    <div className="flex justify-between items-center mb-2">
+                <div className="bg-[var(--color-surface-light)] p-4 rounded-lg border border-[var(--color-border)] animate-slide-in-up" style={{ animationDelay: '500ms' }}>
+                    <div className="flex justify-between items-center mb-3">
                         <label className="text-lg text-[var(--color-text-base)]">Prize Pool Split</label>
-                        <div className="flex items-center gap-2">
-                             <span className="text-sm text-[var(--color-text-muted)]">Kills:</span>
-                             <span className="text-xl font-bold text-[var(--color-success)]">{perKillRewardPercent}%</span>
-                             <span className="text-sm text-[var(--color-text-muted)] mx-1">|</span>
-                             <span className="text-sm text-[var(--color-text-muted)]">Rank:</span>
-                             <span className="text-xl font-bold text-white">{100 - perKillRewardPercent}%</span>
+                        <div className="px-3 py-1 bg-[var(--color-bg)] rounded border border-[var(--color-border)]">
+                             <span className="text-sm text-[var(--color-text-muted)] uppercase mr-2">Per Kill:</span>
+                             <span className="text-xl font-bold text-[var(--color-success)]">₨ {calculatedPerKill}</span>
                         </div>
+                    </div>
+                    
+                    <div className="flex justify-between text-sm mb-1 text-[var(--color-text-muted)]">
+                        <span>Rank ({100 - perKillRewardPercent}%)</span>
+                        <span>Kill ({perKillRewardPercent}%)</span>
                     </div>
                     <input 
                         type="range" 
@@ -200,10 +204,6 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({
                         onChange={(e) => setPerKillRewardPercent(Number(e.target.value))}
                         className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
                     />
-                    <div className="flex justify-between text-xs text-[var(--color-text-muted)] mt-1">
-                        <span>Rank Focused</span>
-                        <span>Kill Focused</span>
-                    </div>
                 </div>
           </div>
 
